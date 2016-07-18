@@ -101,6 +101,11 @@ def word_length_sorted(words):
 
         # return (len(word), [word])
 
+    #sort the values of the dictionary
+
+    for length, word_list in word_len_dict.iteritems():
+        word_list.sort()
+
     return [(key, value) for key, value in word_len_dict.iteritems()]
 
 
