@@ -31,9 +31,7 @@ def count_words(phrase):
 
     word_dict = {}
 
-    phrase = phrase.split()
-
-    for word in phrase: 
+    for word in phrase.split(): 
         word_dict[word] = word_dict.get(word, 0) + 1
         
     return word_dict
@@ -63,10 +61,9 @@ def get_melon_price(melon_name):
     'Cantaloupe': 2.50, 
     'Musk': 3.25, 
     'Christmas':14.25,
-    'Tomato': 'No price found'
     }
 
-    return melon[melon_name]
+    return melon.get(melon_name, 'No price found')
 
 
 def word_length_sorted(words):
@@ -90,10 +87,7 @@ def word_length_sorted(words):
     word_len_dict = {}
 
     for word in words: 
-        if len(word) in word_len_dict:
-            word_len_dict.setdefault(len(word),[]).append(word)
-        else: 
-            word_len_dict[len(word)] = [word]
+        word_len_dict.setdefault(len(word),[]).append(word)
         # word_len_dict[len(word)] = word_len_dict.get(len(word), [word]) 
 
         # if len(word) in word_len_dict.keys():
@@ -214,6 +208,9 @@ def kids_game(names):
     a dictionary (with the super-fast lookup they provide) can help;
     good solutions here will definitely require a dictionary.
     """
+
+    # Possibly start with dictionary of all words with values set as list of words?
+    # As each word is used, pop it out from the list of words?
 
     results = []
 
