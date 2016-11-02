@@ -158,18 +158,19 @@ def translate_to_pirate_talk(phrase):
     'man!':'man!',
     }
 
-    pirate_phrase = []
+    # pirate_phrase = []
 
-    for word in phrase.split():
-        if word in pirate_dict:
-            pirate_phrase.append(pirate_dict[word])
-        else: 
-            pirate_phrase.append(word)
+    # for word in phrase.split():
+    #     if word in pirate_dict:
+    #         pirate_phrase.append(pirate_dict[word])
+    #     else: 
+    #         pirate_phrase.append(word)
     
-    return ' '.join(pirate_phrase)
+    # return ' '.join(pirate_phrase)
     
 
-
+    # Using list comprehension
+    return ' '.join([pirate_dict.get(word, word) for word in phrase.split()])
 
 def kids_game(names):
     """Play a kids' word chain game.
@@ -212,19 +213,34 @@ def kids_game(names):
     # Possibly start with dictionary of all words with values set as list of words?
     # As each word is used, pop it out from the list of words?
 
-    results = []
+    # List will start with first name
+    output = [names.pop(0)]
 
-    results.append(names[0])
+    # Create dict with first letter and name
+    first_letter_dict = {}
 
-    new_name_list = names[1:]
+    # Create dict of first letter and list of names
+    for name in names:
+        if name[0] not in first_letter_dict:
+            first_letter_dict[name[0]] = [name]
 
-    i = 0 
-    for name in new_name_list: 
-        if results[i][-1] == name[0]:
-            results.append(name)
-            i += 1
+        else:
+            first_letter_dict[name[0]].append(name)
 
-    print results
+    # Do looping to look for the first word with the start letter of last letter of the last word in the output list
+    while True:
+
+        start_letter = output[-1][-1]
+
+        #If there is no words with that start letter, break out of loop
+        if not first_letter_dict.get(start_letter):
+            break
+
+        # Get the first word with that start letter and remove
+        word = first_letter_dict[start_letter].pop(0)
+        output.append(word)
+
+    return output
 
 #####################################################################
 # You can ignore everything below this.
